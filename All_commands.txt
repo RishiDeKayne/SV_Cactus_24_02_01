@@ -37,7 +37,19 @@ plot(newtree)
 ape::write.tree(newtree, file='../../../Kelley_Lab/SV_paper/pruned_tree_test.txt')
 
 #tree ends up being:
+#tree.txt
 (((Ptherm_S:1,Psulph_S:1.077854):0.263147,(Pmex_NS:1,Pmex_S:1):0.317974):4.622694,(Gsex_NS:1,(Geury_S:1,Gsex_S:1):1.46119):4.665659);
+
+#cactus_test_run.txt
+(((Ptherm_S:1,Psulph_S:1.077854):0.263147,(Pmex_NS:1,Pmex_S:1):0.317974):4.622694,(Gsex_NS:1,(Geury_S:1,Gsex_S:1):1.46119):4.665659);
+
+Psulph_S	/hb/home/rdekayne/SV_WGA/Psulph_S.fa
+Ptherm_S	/hb/home/rdekayne/SV_WGA/Ptherm_S.fa
+Pmex_S	/hb/home/rdekayne/SV_WGA/Pmex_S.fa
+Geury_S	/hb/home/rdekayne/SV_WGA/Geury_S.fa
+Gsex_NS	/hb/home/rdekayne/SV_WGA/Gsex_NS.fa
+Gsex_S	/hb/home/rdekayne/SV_WGA/Gsex_S.fa
+Pmex_NS /hb/home/rdekayne/SV_WGA/Pmex_NS.fa
 
 
 #on hummingbird load cactus using module load
