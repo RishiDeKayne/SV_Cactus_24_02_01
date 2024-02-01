@@ -1,1 +1,45 @@
+#Code for the whole genome alignment of 7 new reference genomes:
+#the 7 softmasked assemblies to be aligned are here:
+/hb/groups/kelley_lab/poeciliids/hifi_genomes/04_structural_annotation/02_Repeatmasker
+
+mkdir -p /hb/home/rdekayne/SV_WGA && cd /hb/home/rdekayne/SV_WGA
+cp /hb/groups/kelley_lab/poeciliids/hifi_genomes/04_structural_annotation/02_Repeatmasker/*.fa .
+
+#now to rename them:
+#P. sulphuraria (S) 1018
+#P. thermalis (S) 1019
+#P. mexicana (S) 1020
+#G. eurystoma (S) 2028
+#G. sexradiata (NS) 2029
+#G. sexradiata (S) 2030
+#P. mexicana (NS) 2031
+
+mv m84066_230420_220836_s1.hifi_reads.bc1018.asm.bp.p_ctg.softmasked.fa Psulph_S.fa
+mv m84066_230420_220836_s1.hifi_reads.bc1019.asm.bp.p_ctg.softmasked.fa Ptherm_S.fa
+mv m84066_230420_220836_s1.hifi_reads.bc1020.asm.bp.p_ctg.softmasked.fa Pmex_S.fa
+mv m84066_231208_213947_s3.hifi_reads.bc2028.asm.bp.p_ctg.softmasked.fa Geury_S.fa
+mv m84066_231208_213947_s3.hifi_reads.bc2029.asm.bp.p_ctg.softmasked.fa Gsex_NS.fa
+mv m84066_231208_213947_s3.hifi_reads.bc2030.asm.bp.p_ctg.softmasked.fa Gsex_S.fa
+mv m84066_231208_213947_s3.hifi_reads.bc2031.asm.bp.p_ctg.softmasked.fa Pmex_NS.fa
+
+#need a tree for cactus so will use species tree from De-Kayne et al. in review
+##TEST WITH OLD VERSION - Read into R and keep only tips we are interested in:
+library(ape)
+
+tree <- read.tree("../../../Kelley_Lab/SV_paper/Shuffled_tree.nwk")
+tree
+plot(tree)
+
+tip <- c("'MX15-739_G.sexradiata_0'","'MX15-650_G.eurystoma_1'","'MX15-747_G.sexradiata_1'","'vg_P.mexicana_0'","'lluvia_P.mexicana_1'","'banos_P.sulphuraria_1'","'esperanza_P.thermalis_1'")
+newtree <- keep.tip(tree, tip)
+plot(newtree)
+
+ape::write.tree(newtree, file='../../../Kelley_Lab/SV_paper/pruned_tree_test.txt')
+
+#tree ends up being:
+(((Ptherm_S:1,Psulph_S:1.077854):0.263147,(Pmex_NS:1,Pmex_S:1):0.317974):4.622694,(Gsex_NS:1,(Geury_S:1,Gsex_S:1):1.46119):4.665659);
+
+
+#on hummingbird load cactus using module load
+module load cactus
 
