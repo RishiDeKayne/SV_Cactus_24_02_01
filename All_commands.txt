@@ -127,6 +127,8 @@ touch ./validate_mut.done
 module load cactus
 sbatch hal_mut.sh
 
+###https://useast.ensembl.org/info/website/upload/psl.html
+
 #hal_synt.sh
 #!/bin/bash
 #SBATCH --job-name=hal_synt
