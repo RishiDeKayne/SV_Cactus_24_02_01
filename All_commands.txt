@@ -58,3 +58,37 @@ AnaAna1 ./SV_WGA/AnaAna1.fa
 #on hummingbird load cactus using module load
 module load cactus
 
+mkdir -p /hb/home/rdekayne/SV_WGA/output && cd /hb/home/rdekayne/SV_WGA/output
+#unzip the tar here
+
+mkdir -p /hb/home/rdekayne/SV_WGA/output/analysis && cd /hb/home/rdekayne/SV_WGA/output/analysis
+module load cactus
+
+#hal_val.sh
+#!/bin/bash
+#SBATCH --job-name=hal_val
+#SBATCH --time=0-24:00:00
+#SBATCH --partition=128x24
+#SBATCH --output=halval.%j.out # output file
+#SBATCH --error=halval.%j.err # error file
+#SBATCH -N 1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=40GB 
+
+module load hb hb-gnu htslib/htslib-1.17 bwa-mem2/bwa-mem2-2.2.1 sambamba picard mosdepth samtools bcftools plink admixture cactus
+
+halValidate ../steps-output/fish.hal
+halStats ../steps-output/fish.hal
+
+touch ./validate_stat.done
+
+#run
+module load cactus
+sbatch hal_val.sh
+
+
+
+
+
+
+
