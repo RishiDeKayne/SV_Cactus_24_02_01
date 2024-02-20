@@ -140,7 +140,7 @@ sbatch hal_mut.sh
 
 module load hb hb-gnu htslib/htslib-1.17 bwa-mem2/bwa-mem2-2.2.1 sambamba picard mosdepth samtools bcftools plink admixture cactus
 
-halSynteny ../steps-output/fish.hal out.psl.file.txt
+halSynteny --queryGenome Ptherm_S --targetGenome Psulph_S ../steps-output/fish.hal out.psl.file.txt
 
 touch ./synt_hal.done
 
