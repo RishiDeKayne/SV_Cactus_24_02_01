@@ -147,3 +147,5 @@ touch ./synt_hal.done
 #run
 module load cactus
 sbatch hal_synt.sh
+
+phast/phast-1.5
