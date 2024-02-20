@@ -86,9 +86,46 @@ touch ./validate_stat.done
 module load cactus
 sbatch hal_val.sh
 
+#hal v2.2
+#((((Ptherm_S:1,Psulph_S:1)Anc4:1,(Pmex_NS:1,Pmex_S:1)Anc5:1)Anc2:1,(Gsex_NS:1,(Geury_S:1,Gsex_S:1)Anc6:1)Anc3:1)Anc1:1,AnaAna1:1)Anc0;
 
+#GenomeName, NumChildren, Length, NumSequences, NumTopSegments, NumBottomSegments
+#Anc0, 2, 475034405, 2541, 0, 19084562
+#Anc1, 2, 585903820, 4416, 22554666, 32770445
+#Anc2, 2, 677422471, 4552, 33573708, 20952371
+#Anc4, 2, 691387001, 4870, 21221333, 3914060
+#Ptherm_S, 0, 729053448, 135, 4423575, 0
+#Psulph_S, 0, 723457457, 111, 4381748, 0
+#Anc5, 2, 695724466, 3695, 21282661, 2841210
+#Pmex_NS, 0, 728178560, 189, 3299410, 0
+#Pmex_S, 0, 722206644, 115, 3212852, 0
+#Anc3, 2, 627430088, 2918, 32972314, 22594821
+#Gsex_NS, 0, 669605292, 252, 23414881, 0
+#Anc6, 2, 639389773, 2410, 22602812, 7601885
+#Geury_S, 0, 687466260, 737, 8104416, 0
+#Gsex_S, 0, 670540107, 283, 7954470, 0
+#AnaAna1, 0, 867632993, 33, 25143030, 0
 
+#hal_mut.sh
+#!/bin/bash
+#SBATCH --job-name=hal_mut
+#SBATCH --time=0-24:00:00
+#SBATCH --partition=128x24
+#SBATCH --output=halmut.%j.out # output file
+#SBATCH --error=halmut.%j.err # error file
+#SBATCH -N 1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=40GB 
 
+module load hb hb-gnu htslib/htslib-1.17 bwa-mem2/bwa-mem2-2.2.1 sambamba picard mosdepth samtools bcftools plink admixture cactus
+
+halSummarizeMutations ../steps-output/fish.hal
+
+touch ./validate_mut.done
+
+#run
+module load cactus
+sbatch hal_mut.sh
 
 
 
