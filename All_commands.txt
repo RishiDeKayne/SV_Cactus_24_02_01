@@ -44,7 +44,7 @@ ape::write.tree(newtree, file='../../../Kelley_Lab/SV_paper/pruned_tree_test.txt
 (((Ptherm_S:1,Psulph_S:1.077854):0.263147,(Pmex_NS:1,Pmex_S:1):0.317974):4.622694,(Gsex_NS:1,(Geury_S:1,Gsex_S:1):1.46119):4.665659);
 
 #cactus_run.txt
-((((Ptherm_S:1,Psulph_S:1):1,(Pmex_NS:1,Pmex_S:1):1):1,(Gsex_NS:1,(Geury_S:1, Gsex_S:1):1):1):1,AnaAna1:1);
+((((Ptherm_S:1,Psulph_S:1):1,(Pmex_NS:1,Pmex_S:1):1):1,(Gsex_NS:1,(Geury_S:1,Gsex_S:1):1):1):1,AnaAna1:1);
 
 Psulph_S	./SV_WGA/Psulph_S.fa
 Ptherm_S	./SV_WGA/Ptherm_S.fa
@@ -128,6 +128,10 @@ module load cactus
 sbatch hal_mut.sh
 
 ###https://useast.ensembl.org/info/website/upload/psl.html
+#--queryGenome <value>:         source genome [default = ""]
+#--targetGenome <value>:        reference genome name [default = ""]
+#Pmex_NS -> Pmex S -> P sulph -> p therm -> g eury -> g sex s -> g sex ns
+#((((Ptherm_S:1,Psulph_S:1)Anc4:1,(Pmex_NS:1,Pmex_S:1)Anc5:1)Anc2:1,(Gsex_NS:1,(Geury_S:1,Gsex_S:1)Anc6:1)Anc3:1)Anc1:1,AnaAna1:1)Anc0;
 
 #hal_synt.sh
 #!/bin/bash
@@ -142,7 +146,12 @@ sbatch hal_mut.sh
 
 module load hb hb-gnu htslib/htslib-1.17 bwa-mem2/bwa-mem2-2.2.1 sambamba picard mosdepth samtools bcftools plink admixture cactus
 
-halSynteny --queryGenome Ptherm_S --targetGenome Psulph_S ../steps-output/fish.hal out.psl.file.txt
+halSynteny --queryGenome Pmex_S --targetGenome Pmex_NS ../steps-output/fish.hal out.psl1.Pmex_S.Pmex_NS.file.txt
+halSynteny --queryGenome Psulph_S --targetGenome Pmex_S ../steps-output/fish.hal out.psl2.Psulph_S.Pmex_S.file.txt
+halSynteny --queryGenome Ptherm_S --targetGenome Psulph_S ../steps-output/fish.hal out.psl3.Ptherm_S.Psulph_S.file.txt
+halSynteny --queryGenome Geury_S --targetGenome Ptherm_S ../steps-output/fish.hal out.psl4.Geury_S.Ptherm_S.file.txt
+halSynteny --queryGenome Gsex_S --targetGenome Geury_S ../steps-output/fish.hal out.psl5.Gsex_S.Geury_S.file.txt
+halSynteny --queryGenome Gsex_NS --targetGenome Gsex_S ../steps-output/fish.hal out.psl6.Gsex_NS.Gsex_S.file.txt
 
 touch ./synt_hal.done
 
