@@ -159,4 +159,41 @@ touch ./synt_hal.done
 module load cactus
 sbatch hal_synt.sh
 
-phast/phast-1.5
+#use psulf and annotation here:/hb/groups/kelley_lab/poeciliids/hifi_genomes/04_structural_functional_annotation/02_annotate_genes for analysis of conserved regions
+#hal2maf.sh
+#!/bin/bash
+#SBATCH --job-name=hal_2_maf
+#SBATCH --time=0-24:00:00
+#SBATCH --partition=128x24
+#SBATCH --output=hal_2_maf.%j.out # output file
+#SBATCH --error=hal_2_maf.%j.err # error file
+#SBATCH -N 1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=40GB 
+
+module load hb hb-gnu htslib/htslib-1.17 bwa-mem2/bwa-mem2-2.2.1 sambamba picard mosdepth samtools bcftools plink admixture cactus phast
+
+hal2maf ../steps-output/fish.hal ../steps-output/fish.maf
+
+touch hal_2_maf.done
+
+##run
+module load hb hb-gnu htslib/htslib-1.17 bwa-mem2/bwa-mem2-2.2.1 sambamba picard mosdepth samtools bcftools plink admixture cactus phast
+sbatch hal2maf.sh
+
+#hal_cons1.sh
+#!/bin/bash
+#SBATCH --job-name=hal_cons1
+#SBATCH --time=0-24:00:00
+#SBATCH --partition=128x24
+#SBATCH --output=hal_cons1.%j.out # output file
+#SBATCH --error=hal_cons1.%j.err # error file
+#SBATCH -N 1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=40GB 
+
+module load hb hb-gnu htslib/htslib-1.17 bwa-mem2/bwa-mem2-2.2.1 sambamba picard mosdepth samtools bcftools plink admixture cactus phast
+
+halPHyloPTrain.py
+
+touch ./synt_hal.done
