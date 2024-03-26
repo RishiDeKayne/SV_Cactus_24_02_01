@@ -197,3 +197,6 @@ module load hb hb-gnu htslib/htslib-1.17 bwa-mem2/bwa-mem2-2.2.1 sambamba picard
 halPHyloPTrain.py
 
 touch ./synt_hal.done
+
+#PSMC 
+/hb/home/jealdavi/project_1_JD/06_psmc/
