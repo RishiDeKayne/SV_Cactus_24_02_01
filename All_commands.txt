@@ -200,3 +200,22 @@ touch ./synt_hal.done
 
 #PSMC 
 /hb/home/jealdavi/project_1_JD/06_psmc/
+
+###############
+mkdir -p /hb/home/rdekayne/SV_synteny && cd /hb/home/rdekayne/SV_synteny
+cp /hb/groups/kelley_lab/poeciliids/hifi_genomes/10_busco_synteny/Geury_busco/run_cyprinodontiformes_odb10/full_table.tsv ./Geury_busco_output.tsv
+cp /hb/groups/kelley_lab/poeciliids/hifi_genomes/10_busco_synteny/GsexNS_busco/run_cyprinodontiformes_odb10/full_table.tsv ./GsexNS_busco_output.tsv
+cp /hb/groups/kelley_lab/poeciliids/hifi_genomes/10_busco_synteny/GsexS_busco/run_cyprinodontiformes_odb10/full_table.tsv ./GsexS_busco_output.tsv
+cp /hb/groups/kelley_lab/poeciliids/hifi_genomes/10_busco_synteny/PmexNS_busco/run_cyprinodontiformes_odb10/full_table.tsv ./PmexNS_busco_output.tsv
+cp /hb/groups/kelley_lab/poeciliids/hifi_genomes/10_busco_synteny/PmexS_busco/run_cyprinodontiformes_odb10/full_table.tsv ./PmexS_busco_output.tsv
+cp /hb/groups/kelley_lab/poeciliids/hifi_genomes/10_busco_synteny/Psulph_busco/run_cyprinodontiformes_odb10/full_table.tsv ./Psulph_busco_output.tsv
+
+ls *.tsv > raw.busco.list.txt
+
+cat raw.busco.list.txt | while read line 
+do
+	echo ${line}
+	awk '{if($2 == "Complete"){print}}' ${line} > ${line}_complete.txt
+done 
+
+scp rdekayne@hb.ucsc.edu:/hb/home/rdekayne/SV_synteny/*_complete.txt .
