@@ -219,3 +219,25 @@ do
 done 
 
 scp rdekayne@hb.ucsc.edu:/hb/home/rdekayne/SV_synteny/*_complete.txt .
+
+#and get indices:
+#/hb/groups/kelley_lab/reference_genomes 
+mkdir -p /hb/home/rdekayne/SV_synteny/assemblies && cd /hb/home/rdekayne/SV_synteny/assemblies
+cp /hb/groups/kelley_lab/reference_genomes/*bc*.fa .
+cp /hb/groups/kelley_lab/poeciliids/hifi_genomes/02_nuc_assembly/02_HiFiasm/assemblies/*.fa .
+
+module load samtools
+samtools faidx m84066_231208_213947_s3.hifi_reads.bc2028.asm.bp.p_ctg.fa 
+mv m84066_231208_213947_s3.hifi_reads.bc2028.asm.bp.p_ctg.fa.fai Geury.fai
+samtools faidx m84066_231208_213947_s3.hifi_reads.bc2029.asm.bp.p_ctg.fa 
+mv m84066_231208_213947_s3.hifi_reads.bc2029.asm.bp.p_ctg.fa.fai GsexNS.fai
+samtools faidx m84066_231208_213947_s3.hifi_reads.bc2030.asm.bp.p_ctg.fa 
+mv m84066_231208_213947_s3.hifi_reads.bc2030.asm.bp.p_ctg.fa.fai GsexS.fai
+samtools faidx m84066_231208_213947_s3.hifi_reads.bc2031.asm.bp.p_ctg.fa 
+mv m84066_231208_213947_s3.hifi_reads.bc2031.asm.bp.p_ctg.fa.fai PmexNS.fai
+samtools faidx P.mexicana.PSO_hifi_reads.bc1020.asm.bp.p_ctg.fa 
+mv P.mexicana.PSO_hifi_reads.bc1020.asm.bp.p_ctg.fa.fai PmexS.fai
+samtools faidx P.sulphuraria_hifi_reads.bc1018.asm.bp.p_ctg.fa 
+mv P.sulphuraria_hifi_reads.bc1018.asm.bp.p_ctg.fa.fai Psulph.fai
+
+scp rdekayne@hb.ucsc.edu:/hb/home/rdekayne/SV_synteny/assemblies/*.fai .
