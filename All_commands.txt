@@ -241,3 +241,4 @@ samtools faidx P.sulphuraria_hifi_reads.bc1018.asm.bp.p_ctg.fa
 mv P.sulphuraria_hifi_reads.bc1018.asm.bp.p_ctg.fa.fai Psulph.fai
 
 scp rdekayne@hb.ucsc.edu:/hb/home/rdekayne/SV_synteny/assemblies/*.fai .
+
