@@ -1,0 +1,31 @@
+#/hb/groups/kelley_lab/poeciliids/hifi_SV_paper/02_mapped_to_ns/*.bam
+
+#will get depth output to 
+#/hb/groups/kelley_lab/poeciliids/hifi_SV_paper/02_mapped_to_ns/mosdepth_output
+
+#want to run mosdepth:
+
+ls /hb/groups/kelley_lab/poeciliids/hifi_SV_paper/02_mapped_to_ns/*.bam > bam.list
+sed -i 's/\/hb\/groups\/kelley_lab\/poeciliids\/hifi_SV_paper\/02_mapped_to_ns\///g' bam.list
+
+#ethe1_depth.sh
+
+#!/bin/bash
+#SBATCH --job-name=mosdepth
+#SBATCH --time=0-12:00:00
+#SBATCH --partition=128x24
+#SBATCH --output=depth.%j.out # output file
+#SBATCH --error=depth.%j.err # error file
+#SBATCH -N 1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=10GB 
+
+module load samtools sambamba picard mosdepth
+
+ind=${SLURM_ARRAY_TASK_ID}
+indiv_name=$(cat /hb/groups/kelley_lab/poeciliids/hifi_SV_paper/02_mapped_to_ns/bam.list | sed -n ${ind}p)
+
+mosdepth -n ${indiv_name} /hb/groups/kelley_lab/poeciliids/hifi_SV_paper/02_mapped_to_ns/${indiv_name} && touch ${indiv_name}.mosdepth.done 
+
+##run
+sbatch ethe1_depth.sh
