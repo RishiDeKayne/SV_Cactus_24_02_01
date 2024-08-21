@@ -3,6 +3,9 @@
 #will get depth output to 
 #/hb/groups/kelley_lab/poeciliids/hifi_SV_paper/02_mapped_to_ns/mosdepth_output
 
+#first extract the necessary windows from the bam files
+#g3631 -  ptg000006l:13076843-13081111 and g3632 (2 transcripts for this copy) - ptg000006l:13083315-13087812
+
 #want to run mosdepth:
 
 ls /hb/groups/kelley_lab/poeciliids/hifi_SV_paper/02_mapped_to_ns/*.bam > bam.list
